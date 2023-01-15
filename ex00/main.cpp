@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: blevrel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 17:57:17 by blevrel           #+#    #+#             */
+/*   Updated: 2023/01/13 09:31:14 by blevrel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "main.hpp"
 
 int	detect_type(std::string literal)
 {
+	if (!literal[0])
+		return (0);
 	if (is_char(literal) == true)
 		return (CHAR);
 	if (is_int(literal) == true)
@@ -23,7 +36,10 @@ bool	is_char(std::string literal)
 bool	is_int(std::string literal)
 {
 	size_t	pos;
+	int		nb_test;
 
+	if (!(std::stringstream(literal) >> nb_test))
+		return (false);
 	pos = 0;
 	if (literal.find("-", pos) == 0 || literal.find("+", pos) == 0)
 		pos = 1;

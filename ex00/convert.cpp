@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: blevrel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 17:57:18 by blevrel           #+#    #+#             */
+/*   Updated: 2023/01/15 10:39:06 by blevrel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "main.hpp"
+#include <climits>
+#include <cstdlib>
+#include <iomanip>
 
 void	convert_char(std::string literal)
 {
@@ -16,16 +30,16 @@ void	convert_char(std::string literal)
 
 void	convert_int(std::string literal)
 {
-	double	nb = strtod(literal.c_str(), NULL);
+	int	nb;
 
-	if (nb < static_cast<double>(32) || nb > static_cast<double>(126))
+	std::stringstream(literal) >> nb;
+	if (nb < 0 || nb > 255)
+		std::cout << "char : Impossible" << std::endl;
+	else if (nb < 32 || nb > 126)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << static_cast<char>(nb) << "'" << std::endl;
-	if (nb > static_cast<double>(INT_MAX) || nb < static_cast<double>(INT_MIN))
-		std::cout << "int: overflow" << std::endl;
-	else
-		std::cout << "int: " << static_cast<int>(nb) << std::endl;
+	std::cout << "int: " << nb << std::endl;
 	std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << static_cast<float>(nb) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(nb) << std::endl;
@@ -33,44 +47,44 @@ void	convert_int(std::string literal)
 
 void	convert_float(std::string literal)
 {
-	double	nb = strtod(literal.c_str(), NULL);
+	float	nb;
 
-	if (!literal.compare("nanf") || !literal.compare("+inff") || !literal.compare("-inff") || !literal.compare("inff"))
+	std::stringstream(literal) >> nb;
+	if (!literal.compare("nanf") || !literal.compare("+inff") || !literal.compare("-inff") || !literal.compare("inff") || nb < 0 || nb > 255)
 		std::cout << "char : impossible" << std::endl;
-	else if (nb < static_cast<double>(32) || nb > static_cast<double>(126))
+	else if (nb < static_cast<float>(32) || nb > static_cast<float>(126))
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << static_cast<char>(nb) << "'" << std::endl;
 	if (!literal.compare("nanf"))
 		std::cout << "int: impossible" << std::endl;
-	else if (nb > static_cast<double>(INT_MAX) || nb < static_cast<double>(INT_MIN))
-		std::cout << "int: overflow" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(nb) << std::endl;
 	std::cout << std::fixed << std::setprecision(1);
-	std::cout << "float: " << static_cast<float>(nb) << "f" << std::endl;
+	std::cout << "float: " << nb << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(nb) << std::endl;
 }
 
 void	convert_double(std::string literal)
 {
-	double	nb = strtod(literal.c_str(), NULL);
+	double	nb;
 
-	if (!literal.compare("nan") || !literal.compare("+inf") || !literal.compare("-inf") || !literal.compare("inf"))
+	std::stringstream(literal) >> nb;
+	if (!literal.compare("nan") || !literal.compare("+inf") || !literal.compare("-inf") || !literal.compare("inf") || nb < 0 || nb > 255)
 		std::cout << "char : impossible" << std::endl;
-	else if (nb < static_cast<double>(32) || nb > static_cast<double>(126))
+	else if (nb < 3 || nb > 126)
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << static_cast<char>(nb) << "'" << std::endl;
 	if (!literal.compare("nan"))
 		std::cout << "int: impossible" << std::endl;
-	else if (nb > static_cast<double>(INT_MAX) || nb < static_cast<double>(INT_MIN))
+	else if (nb > INT_MAX || nb < INT_MIN)
 		std::cout << "int: overflow" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(nb) << std::endl;
 	std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << static_cast<float>(nb) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(nb) << std::endl;
+	std::cout << "double: " << nb << std::endl;
 }
 
 void	convert(int type, std::string literal)
