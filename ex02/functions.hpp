@@ -1,10 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: blevrel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/13 09:38:09 by blevrel           #+#    #+#             */
+/*   Updated: 2023/01/13 10:41:01 by blevrel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#pragma once
 #include "Base.hpp"
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
 
 Base	*generate(void);
 void	identify(Base *p);
